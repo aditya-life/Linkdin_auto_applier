@@ -123,6 +123,7 @@ def createChromeSession(isRetry: bool = False):
             except Exception:
                 pass
         options.add_argument(f"--user-data-dir={profile_dir}")
+        options.add_argument("--profile-directory=Default")
     else:
         print_lg("Logging in with a guest profile, Web history will not be saved!")
         options.add_argument(f"--user-data-dir={get_default_temp_profile()}")
