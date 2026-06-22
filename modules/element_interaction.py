@@ -105,14 +105,76 @@ def scroll_to_view(driver: WebDriver, element: WebElement, top: bool = False, sm
     return driver.execute_script('arguments[0].scrollIntoView({block: "center", behavior: "'+behavior+'" });', element)
 
 # Enter input text functions
-def text_input_by_ID(driver: WebDriver, id: str, value: str, time: float=5.0) -> None | Exception:
+def text_input_by_ID(driver: WebDriver, id: str, value: str, time_limit: float=5.0) -> None:
     '''
-    Enters `value` into the input field with the given `id` if found, else throws NotFoundException.
-    - `time` is the max time to wait for the element to be found.
+    Enters `value` into the input field with the given `id` (or fallback robust visible selectors) if found.
     '''
-    username_field = WebDriverWait(driver, time).until(EC.presence_of_element_located((By.ID, id)))
-    username_field.send_keys(Keys.CONTROL + "a")
-    username_field.send_keys(value)
+    import time
+    import sys
+    from selenium.webdriver.common.keys import Keys
+    from selenium.common.exceptions import NoSuchElementException
+    
+    # Map of ID to visible selectors
+    selectors = [(By.ID, id)]
+    if id == "username":
+        selectors.extend([
+            (By.XPATH, "//input[@type='email']"),
+            (By.XPATH, "//input[@autocomplete='username']"),
+            (By.XPATH, "//input[contains(@id, 'username') or contains(@name, 'session_key')]")
+        ])
+    elif id == "password":
+        selectors.extend([
+            (By.XPATH, "//input[@type='password']"),
+            (By.XPATH, "//input[@autocomplete='current-password']"),
+            (By.XPATH, "//input[contains(@id, 'password') or contains(@name, 'session_password')]")
+        ])
+
+    # Find the visible element
+    start_time = time.time()
+    field = None
+    while time.time() - start_time < time_limit:
+        for by, val in selectors:
+            try:
+                elements = driver.find_elements(by, val)
+                for el in elements:
+                    if el.is_displayed() and el.is_enabled():
+                        field = el
+                        break
+                if field:
+                    break
+            except Exception:
+                pass
+        if field:
+            break
+        time.sleep(0.2)
+        
+    if not field:
+        # Final fallback
+        for by, val in selectors:
+            try:
+                elements = driver.find_elements(by, val)
+                if elements:
+                    field = elements[0]
+                    break
+            except Exception:
+                pass
+
+    if not field:
+        raise NoSuchElementException(f"Could not find input field with ID or fallback: {id}")
+        
+    # Input the value
+    # Clear existing text using Control+a or Command+a
+    select_all_key = Keys.COMMAND if sys.platform == 'darwin' else Keys.CONTROL
+    try:
+        field.send_keys(select_all_key + "a")
+        field.send_keys(Keys.BACKSPACE)
+    except Exception:
+        try:
+            field.clear()
+        except Exception:
+            pass
+            
+    field.send_keys(value)
 
 def try_xp(driver: WebDriver, xpath: str, click: bool=True) -> WebElement | bool:
     try:

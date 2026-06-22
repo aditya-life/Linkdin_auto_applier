@@ -99,11 +99,28 @@ def is_logged_in_LN() -> bool:
     Function to check if user is logged-in in LinkedIn
     * Returns: `True` if user is logged-in or `False` if not
     '''
-    if driver.current_url == "https://www.linkedin.com/feed/": return True
-    if try_linkText(driver, "Sign in"): return False
-    if try_xp(driver, '//button[@type="submit" and contains(text(), "Sign in")]'):  return False
-    if try_linkText(driver, "Join now"): return False
-    print_lg("Didn't find Sign in link, so assuming user is logged in!")
+    if "feed" in driver.current_url: return True
+    
+    # Check for typical elements that mean we're logged out
+    # (By checking if they are displayed on screen)
+    for selector in [
+        (By.XPATH, "//input[@type='email']"),
+        (By.XPATH, "//input[@type='password']"),
+        (By.ID, "username"),
+        (By.ID, "password"),
+        (By.XPATH, '//button[contains(., "Sign in")]'),
+        (By.LINK_TEXT, "Forgot password?"),
+        (By.LINK_TEXT, "Join now")
+    ]:
+        try:
+            elements = driver.find_elements(*selector)
+            for el in elements:
+                if el.is_displayed():
+                    return False
+        except Exception:
+            pass
+            
+    print_lg("Didn't find any login elements, so assuming user is logged in!")
     return True
 
 
@@ -122,7 +139,20 @@ def login_LN() -> None:
         manual_login_retry(is_logged_in_LN, 2)
         return
     try:
-        wait.until(EC.presence_of_element_located((By.LINK_TEXT, "Forgot password?")))
+        # Wait for either Forgot password or username input to load
+        try:
+            WebDriverWait(driver, 10).until(
+                lambda d: any(
+                    el.is_displayed() for sel in [
+                        (By.LINK_TEXT, "Forgot password?"),
+                        (By.XPATH, "//input[@type='email']"),
+                        (By.ID, "username")
+                    ] for el in d.find_elements(*sel)
+                )
+            )
+        except Exception:
+            pass
+
         try:
             text_input_by_ID(driver, "username", username, 5)
         except Exception as e:
@@ -133,8 +163,32 @@ def login_LN() -> None:
         except Exception as e:
             print_lg("Couldn't find password field.")
             # print_lg(e)
-        # Find the login submit button and click it
-        driver.find_element(By.XPATH, '//button[@type="submit" and contains(text(), "Sign in")]').click()
+            
+        # Find the visible Sign in button and click it
+        signin_selectors = [
+            (By.XPATH, '//button[@type="submit" and contains(text(), "Sign in")]'),
+            (By.XPATH, '//button[@type="submit" or @type="button"][normalize-space(.)="Sign in" or .//span[normalize-space(.)="Sign in"]]'),
+            (By.XPATH, '//button[contains(., "Sign in")]')
+        ]
+        signin_btn = None
+        for by, val in signin_selectors:
+            try:
+                elements = driver.find_elements(by, val)
+                for el in elements:
+                    if el.is_displayed() and el.is_enabled():
+                        signin_btn = el
+                        break
+                if signin_btn:
+                    break
+            except Exception:
+                pass
+                
+        if signin_btn:
+            signin_btn.click()
+            print_lg("Clicked sign in button.")
+        else:
+            driver.find_element(By.XPATH, '//button[@type="submit" and contains(text(), "Sign in")]').click()
+            
     except Exception as e1:
         try:
             profile_button = find_by_class(driver, "profile__details")
@@ -1153,7 +1207,7 @@ chatGPT_tab = False
 linkedIn_tab = False
 
 def main() -> None:
-    pyautogui.alert("Please consider sponsoring this project at:\n\n\n\n", "Support the project", "Okay")
+    print_lg("LinkedIn Auto Applier started.")
     total_runs = 1
     try:
         global linkedIn_tab, tabs_count, useNewResume, aiClient
@@ -1161,7 +1215,7 @@ def main() -> None:
         validate_config()
         
         if not os.path.exists(default_resume_path):
-            pyautogui.alert(text='Your default resume "{}" is missing! Please update it\'s folder path "default_resume_path" in config.py\n\nOR\n\nAdd a resume with exact name and path (check for spelling mistakes including cases).\n\n\nFor now the bot will continue using your previous upload from LinkedIn!'.format(default_resume_path), title="Missing Resume", button="OK")
+            print_lg('WARNING: Your default resume "{}" is missing! Please update it\'s folder path "default_resume_path" in config.py\n\nOR\n\nAdd a resume with exact name and path (check for spelling mistakes including cases).\n\nFor now the bot will continue using your previous upload from LinkedIn!'.format(default_resume_path))
             useNewResume = False
         
         # Login to LinkedIn
@@ -1252,11 +1306,9 @@ def main() -> None:
             timeSaved += 60
             timeSavedMsg = f"In this run, you saved approx {round(timeSaved/60)} mins ({timeSaved} secs), please consider supporting the project."
         msg = f"{quotes}\n\n\n{timeSavedMsg}\nYou can also get your quote and name shown here, or prioritize your bug reports by supporting the project at:\n\n\n\n\nSummary:\n{summary}\n\n\nBest regards,\nAditya Kumar\nhttps://www.linkedin.com/in/aditya-kumar-552232259/\n\nTop Sponsors:\n{sponsors}"
-        pyautogui.alert(msg, "Exiting..")
         print_lg(msg,"Closing the browser...")
         if tabs_count >= 10:
             msg = "NOTE: IF YOU HAVE MORE THAN 10 TABS OPENED, PLEASE CLOSE OR BOOKMARK THEM!\n\nOr it's highly likely that application will just open browser and not do anything next time!" 
-            pyautogui.alert(msg,"Info")
             print_lg("\n"+msg)
         if use_AI and aiClient:
             try:

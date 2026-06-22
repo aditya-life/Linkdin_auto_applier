@@ -111,22 +111,37 @@ def createChromeSession(isRetry: bool = False):
 
     print_lg("IF YOU HAVE MORE THAN 10 TABS OPENED, PLEASE CLOSE OR BOOKMARK THEM! Or it's highly likely that application will just open browser and not do anything!")
     profile_dir = find_default_profile_directory()
-    if isRetry:
-        print_lg("Will login with a guest profile, browsing history will not be saved in the browser!")
-    elif profile_dir and not safe_mode:
+    bot_profile_path = get_default_temp_profile()
+
+    if isRetry or safe_mode:
+        if isRetry:
+            print_lg("Retrying with a dedicated bot profile (auto-job-apply-profile) to avoid lock conflict with open Chrome...")
+        else:
+            print_lg("Logging in with a dedicated bot profile (auto-job-apply-profile)...")
+        
+        # Remove leftover SingletonLock to prevent profile lock issues on macOS/Linux
+        lock_path = os.path.join(bot_profile_path, "SingletonLock")
+        if os.path.islink(lock_path) or os.path.exists(lock_path):
+            try:
+                os.unlink(lock_path)
+                print_lg("Removed leftover Chrome SingletonLock from bot profile.")
+            except Exception:
+                pass
+        options.add_argument(f"--user-data-dir={bot_profile_path}")
+    elif profile_dir:
         # Remove SingletonLock to prevent profile lock issues on macOS/Linux
         lock_path = os.path.join(profile_dir, "SingletonLock")
         if os.path.islink(lock_path) or os.path.exists(lock_path):
             try:
                 os.unlink(lock_path)
-                print_lg("Removed leftover Chrome SingletonLock.")
+                print_lg("Removed leftover Chrome SingletonLock from default profile.")
             except Exception:
                 pass
         options.add_argument(f"--user-data-dir={profile_dir}")
         options.add_argument("--profile-directory=Default")
     else:
-        print_lg("Logging in with a guest profile, Web history will not be saved!")
-        options.add_argument(f"--user-data-dir={get_default_temp_profile()}")
+        print_lg("Logging in with a dedicated bot profile (auto-job-apply-profile)...")
+        options.add_argument(f"--user-data-dir={bot_profile_path}")
     if stealth_mode:
         # try: 
         #     driver = uc.Chrome(driver_executable_path="C:\\Program Files\\Google\\Chrome\\chromedriver-win64\\chromedriver.exe", options=options)
@@ -158,8 +173,8 @@ except Exception as e:
     if isinstance(e,TimeoutError): msg = "Couldn't download Chrome-driver. Set stealth_mode = False in config!"
     print_lg(msg)
     critical_error_log("In Opening Chrome", e)
-    from pyautogui import alert
-    alert(msg, "Error in opening chrome")
+    # from pyautogui import alert
+    # alert(msg, "Error in opening chrome")
     try: driver.quit()
     except NameError: exit()
     
