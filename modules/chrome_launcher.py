@@ -138,7 +138,10 @@ def createChromeSession(isRetry: bool = False):
             else:
                 driver = uc.Chrome(options=options)
     else: driver = webdriver.Chrome(options=options) #, service=Service(executable_path="C:\\Program Files\\Google\\Chrome\\chromedriver-win64\\chromedriver.exe"))
-    driver.maximize_window()
+    try:
+        driver.maximize_window()
+    except Exception:
+        pass
     wait = WebDriverWait(driver, 5)
     actions = ActionChains(driver)
     return options, driver, actions, wait
