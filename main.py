@@ -124,12 +124,12 @@ def login_LN() -> None:
     try:
         wait.until(EC.presence_of_element_located((By.LINK_TEXT, "Forgot password?")))
         try:
-            text_input_by_ID(driver, "username", username, 1)
+            text_input_by_ID(driver, "username", username, 5)
         except Exception as e:
             print_lg("Couldn't find username field.")
             # print_lg(e)
         try:
-            text_input_by_ID(driver, "password", password, 1)
+            text_input_by_ID(driver, "password", password, 5)
         except Exception as e:
             print_lg("Couldn't find password field.")
             # print_lg(e)
