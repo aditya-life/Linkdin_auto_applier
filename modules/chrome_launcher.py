@@ -114,6 +114,14 @@ def createChromeSession(isRetry: bool = False):
     if isRetry:
         print_lg("Will login with a guest profile, browsing history will not be saved in the browser!")
     elif profile_dir and not safe_mode:
+        # Remove SingletonLock to prevent profile lock issues on macOS/Linux
+        lock_path = os.path.join(profile_dir, "SingletonLock")
+        if os.path.islink(lock_path) or os.path.exists(lock_path):
+            try:
+                os.unlink(lock_path)
+                print_lg("Removed leftover Chrome SingletonLock.")
+            except Exception:
+                pass
         options.add_argument(f"--user-data-dir={profile_dir}")
     else:
         print_lg("Logging in with a guest profile, Web history will not be saved!")
