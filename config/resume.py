@@ -1,18 +1,9 @@
-'''
-Author:     Aditya Kumar
-LinkedIn:   https://www.linkedin.com/in/aditya-kumar-552232259/
+"""
+LinkedIn Auto Applier
+Developed by Aditya Kumar
+GitHub: https://github.com/aditya-life/Linkdin_auto_applier
+"""
 
-Copyright (C) 2024 Aditya Kumar
-
-License:    MIT License
-            https://opensource.org/licenses/MIT
-            
-GitHub:     https://github.com/aditya-life/Linkdin_auto_applier
-
-Support me: 
-
-version:    26.01.20.5.08
-'''
 
 from personals import *
 import json
@@ -69,18 +60,8 @@ YOU DON'T HAVE TO EDIT THIS FILE, IF YOU ADDED YOUR DEFAULT RESUME.
 
 
 ############################################################################################################
-'''
-THANK YOU for using my tool 😊! Wishing you the best in your job hunt 🙌🏻!
-
-Sharing is caring! If you found this tool helpful, please share it with your peers 🥺. Your support keeps this project alive.
-
-Support my work on <PATREON_LINK>. Together, we can help more job seekers.
-
-As an independent developer, I pour my heart and soul into creating tools like this, driven by the genuine desire to make a positive impact.
-
-Your support, whether through donations big or small or simply spreading the word, means the world to me and helps keep this project alive and thriving.
-
-Gratefully yours 🙏🏻,
-Aditya Kumar
-'''
+"""
+LinkedIn Auto Applier - Developed by Aditya Kumar
+Good luck with your job search!
+"""
 ############################################################################################################

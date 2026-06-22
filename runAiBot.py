@@ -1,18 +1,9 @@
-'''
-Author:     Aditya Kumar
-LinkedIn:   https://www.linkedin.com/in/aditya-kumar-552232259/
+"""
+LinkedIn Auto Applier
+Developed by Aditya Kumar
+GitHub: https://github.com/aditya-life/Linkdin_auto_applier
+"""
 
-Copyright (C) 2024 Aditya Kumar
-
-License:    MIT License
-            https://opensource.org/licenses/MIT
-            
-GitHub:     https://github.com/aditya-life/Linkdin_auto_applier
-
-Support me: 
-
-version:    26.01.20.5.08
-'''
 
 
 # Imports
@@ -513,7 +504,7 @@ def answer_questions(modal: WebElement, questions_list: set, work_location: str,
                                 foundOption = True
                                 break
                     if not foundOption:
-                        #TODO: Use AI to answer the question need to be implemented logic to extract the options for the question
+                        #TODO: Enable AI assistance to answer the question need to be implemented logic to extract the options for the question
                         print_lg(f'Failed to find an option with text "{answer}" for question labelled "{label_org}", answering randomly!')
                         select.select_by_index(randint(1, len(select.options)-1))
                         answer = select.first_selected_option.text

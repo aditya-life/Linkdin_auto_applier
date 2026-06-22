@@ -1,17 +1,9 @@
-'''
-Author:     Aditya Kumar
-LinkedIn:   https://www.linkedin.com/in/aditya-kumar-552232259/
+"""
+LinkedIn Auto Applier
+Developed by Aditya Kumar
+GitHub: https://github.com/aditya-life/Linkdin_auto_applier
+"""
 
-Copyright (C) 2024 Aditya Kumar
-
-License:    MIT License
-            https://opensource.org/licenses/MIT
-            
-GitHub:     https://github.com/aditya-life/Linkdin_auto_applier
-
-Support me: 
-
-'''
 
 
 ############### OLD CONFIG FILE - FOR REFERENCE FOR DEVELOPERS - DO NOT USE #################
@@ -22,34 +14,34 @@ Support me:
   
 # >>>>>>>>>>> Global Settings <<<<<<<<<<<
 
-# Directory and name of the files where history of applied jobs is saved (Sentence after the last "/" will be considered as the file name).
+# File path configurations for logging history (Sentence after the last "/" will be considered as the file name).
 file_name = "all excels/all_applied_applications_history.csv"
 failed_file_name = "all excels/all_failed_applications_history.csv"
 logs_folder_path = "logs/"
 
-# Set the maximum amount of time allowed to wait between each click in secs
+# Maximum delay duration between click events
 click_gap = 2                      # Enter max allowed secs to wait approximately. (Only Non Negative Integers Eg: 0,1,2,3,....)
 
-# If you want to see Chrome running then set run_in_background as False (May reduce performance). 
+# Run browser headlessly (in background) (May reduce performance). 
 run_in_background = False          # True or False, Note: True or False are case-sensitive ,   If True, this will make pause_at_failed_question, pause_before_submit and run_in_background as False
 
-# If you want to disable extensions then set disable_extensions as True (Better for performance)
+# Disable Chrome extensions for performance (Better for performance)
 disable_extensions = True          # True or False, Note: True or False are case-sensitive
 
-# Run in safe mode. Set this true if chrome is taking too long to open or if you have multiple profiles in browser. This will open chrome in guest profile!
+# Safe mode - opens Chrome using guest profile or if you have multiple profiles in browser. This will open chrome in guest profile!
 safe_mode = False                  # True or False, Note: True or False are case-sensitive
 
-# Do you want scrolling to be smooth or instantaneous? (Can reduce performance if True)
+# Smooth scrolling enablement (Can reduce performance if True)
 smooth_scroll = False              # True or False, Note: True or False are case-sensitive
 
-# If enabled (True), the program would keep your screen active and prevent PC from sleeping. Instead you could disable this feature (set it to false) and adjust your PC sleep settings to Never Sleep or a preferred time. 
+# Prevent computer from sleeping during execution and prevent PC from sleeping. Instead you could disable this feature (set it to false) and adjust your PC sleep settings to Never Sleep or a preferred time. 
 keep_screen_awake = True           # True or False, Note: True or False are case-sensitive (Note: Will temporarily deactivate when any application dialog boxes are present (Eg: Pause before submit, Help needed for a question..))
 
-# Run in undetected mode to bypass anti-bot protections (Preview Feature, UNSTABLE. Recommended to leave it as False)
+# Bypass anti-bot mechanisms using undetected mode (Preview Feature, UNSTABLE. Recommended to leave it as False)
 undetected_mode = True             # True or False, Note: True or False are case-sensitive
 # Now called as stealth_mode
 
-# Use ChatGPT for resume building (Experimental Feature can break the application. Recommended to leave it as False) 
+# Use AI model for dynamic resume generation (Experimental Feature can break the application. Recommended to leave it as False) 
 use_resume_generator = False       # True or False, Note: True or False are case-sensitive ,   This feature may only work with 'undetected_mode' = True. As ChatGPT website is hosted by CloudFlare which is protected by Anti-bot protections!
 
 
@@ -57,14 +49,14 @@ use_resume_generator = False       # True or False, Note: True or False are case
 # ----------------------------------------------  AUTO APPLIER  ---------------------------------------------- #
 
 # Login Credentials for LinkedIn
-username = "username@example.com"  # Enter your username in the quotes
-password = "example_password"      # Enter your password in the quotes
+username = "username@example.com"  # Your LinkedIn email address
+password = "example_password"      # Your LinkedIn password
 
-# These Sentences are Searched in LinkedIn
-# Enter your search terms inside '[ ]' with quotes ' "searching title" ' for each search followed by comma ', ' Eg: ["Software Engineer", "Software Developer", "Selenium Developer"]
+# Keywords to query on LinkedIn search
+# List of search queries in brackets ' "searching title" ' for each search followed by comma ', ' Eg: ["Software Engineer", "Software Developer", "Selenium Developer"]
 search_terms = ["Software Engineer", "Software Developer", "Python Developer", "Selenium Developer", "React Developer", "Java Developer", "Front End Developer", "Full Stack Developer", "Web Developer", "Nodejs Developer"]
 
-# Search location, this will be filled in "City, state, or zip code" search box. If left empty as "", tool will not fill it.
+# Geographic location target for search "City, state, or zip code" search box. If left empty as "", tool will not fill it.
 search_location = ""               # Some valid examples: "", "United States", "India", "Chicago, Illinois, United States", "90001, Los Angeles, California, United States", "Bengaluru, Karnataka, India", etc.
 
 
@@ -106,7 +98,7 @@ fair_chance_employer = False       # True or False, Note: True or False are case
 # >>>>>>>>>>> Easy Apply Questions & Inputs <<<<<<<<<<<
 
 # Phone number (required), make sure it's valid.
-phone_number = "9876543210"        # Enter your 10 digit number in quotes Eg: "9876543210"
+phone_number = "9876543210"        # Enter your 10 digit number in quotes Eg: "9504022167"
 
 # Give an relative or absolute path of your default resume to be uploaded. If file in not found, will continue using your previously uploaded resume in LinkedIn.
 default_resume_path = "all resumes/default/resume.pdf"      # (In Development)
@@ -123,7 +115,7 @@ us_citizenship = "U.S. Citizen/Permanent Resident"
 
 
 # What is the link to your portfolio website, leave it empty as "", if you want to leave this question unanswered
-website = "https://github.com/GodsScion"                       # "www.example.bio" or "" and so on....
+website = "https://github.com/aditya-life"                       # "www.example.bio" or "" and so on....
 
 # What to enter in your desired salary question, only enter in numbers inside quotes as some companies only allow numbers
 desired_salary = "120000"          # "80000", "90000", "100000" or "120000" and so on....
@@ -134,15 +126,15 @@ confidence_level = "8"             # Any number between "1" to "10" including 1 
 current_city = ""                  # If left empty will fill in location of jobs location.
 
 ## SOME ANNOYING QUESTIONS BY COMPANIES 🫠 ##
-# Address, not so common question but some job applications make it required!
+# Optional address details required by some application portals
 street = "123 Main Street"
 state = "STATE"
 zipcode = "12345"
 country = "Will Let You Know When Established"
 
-first_name = "Aditya"                 # Your first name in quotes Eg: "First", "Sai"
-middle_name = ""            # Your name in quotes Eg: "Middle", "Vignesh", ""
-last_name = "Kumar"                # Your last name in quotes Eg: "Last", "Golla"
+first_name = "Aditya"                 # Your first name in quotes Eg: "First", "Aditya"
+middle_name = ""            # Your name in quotes Eg: "Middle", "Kumar", ""
+last_name = "Kumar"                # Your last name in quotes Eg: "Last", "Kumar"
 
 # Your LinkedIn headline in quotes Eg: "Software Engineer @ Google, Masters in Computer Science", "Recent Grad Student @ MIT, Computer Science"
 headline = "Headline"
@@ -157,13 +149,13 @@ cover_letter = "Cover Letter"
 recent_employer = "Not Applicable" # "", "Lala Company", "Google", "Snowflake", "Databricks"
 
 ## US Equal Opportunity questions
-# What is your ethnicity or race? If left empty as "", tool will not answer the question. However, note that some companies make it compulsory to be answered
+# Self-identified ethnicity or race category If left empty as "", tool will not answer the question. However, note that some companies make it compulsory to be answered
 ethnicity = "Decline"              # "Decline", "Hispanic/Latino", "American Indian or Alaska Native", "Asian", "Black or African American", "Native Hawaiian or Other Pacific Islander", "White", "Other"
 
-# How do you identify yourself? If left empty as "", tool will not answer the question. However, note that some companies make compulsory to be answered
+# Gender identity selection If left empty as "", tool will not answer the question. However, note that some companies make compulsory to be answered
 gender = "Decline"                 # "Male", "Female", "Other", "Decline" or ""
 
-# Are you physically disabled or have a history/record of having a disability? If left empty as "", tool will not answer the question. However, note that some companies make it compulsory to be answered
+# Disability status reporting If left empty as "", tool will not answer the question. However, note that some companies make it compulsory to be answered
 disability_status = "Decline"      # "Yes", "No", "Decline"
 
 veteran_status = "Decline"         # "Yes", "No", "Decline"
@@ -173,7 +165,7 @@ veteran_status = "Decline"         # "Yes", "No", "Decline"
 
 # >>>>>>>>>>> LinkedIn Settings <<<<<<<<<<<
 
-# Do you want to randomize the search order for search_terms?
+# Randomize order of search keywords
 randomize_search_order = False     # True of False
 
 # Do you want to overwrite previous answers?
@@ -181,20 +173,20 @@ overwrite_previous_answers = False # True or False, Note: True or False are case
 
 
 ## Skip irrelevant jobs
-# Avoid applying to these companies, and companies with these bad words in their 'About Company' section...
+# Exclude companies matching these blacklist keywords
 about_company_bad_words = ["Crossover", "Staffing", "Recruiting", "Jobot"]       # (dynamic multiple search) or leave empty as []. Ex: ["Staffing", "Recruiting", "Name of Company you don't want to apply to"]
 
-# Skip checking for `about_company_bad_words` for these companies if they have these good words in their 'About Company' section... [Exceptions, For example, I want to apply to "Robert Half" although it's a staffing company]
+# Whitelist companies to bypass blacklist checks if they have these good words in their 'About Company' section... [Exceptions, For example, I want to apply to "Robert Half" although it's a staffing company]
 about_company_good_words = []      # (dynamic multiple search) or leave empty as []. Ex: ["Robert Half", "Dice"]
 
 
-# Avoid applying to these companies if they have these bad words in their 'Job Description' section...  (In development)
+# Skip job postings containing these negative terms section...  (In development)
 bad_words = ["US Citizen","USA Citizen","No C2C", "No Corp2Corp", ".NET", "Embedded Programming", "PHP", "Ruby"]                     # (dynamic multiple search) or leave empty as []. Case Insensitive. Ex: ["word_1", "phrase 1", "word word", "polygraph", "US Citizenship", "Security Clearance"]
 
 # Do you have an active Security Clearance? (True for Yes and False for No)
 security_clearance = False         # True or False, Note: True or False are case-sensitive
 
-# Do you have a Masters degree? (True for Yes and False for No). If True, the tool will apply to jobs containing the word 'master' in their job description and if it's experience required <= current_experience + 2 and current_experience is not set as -1. 
+# Do you hold a master's degree (True/False) (True for Yes and False for No). If True, the tool will apply to jobs containing the word 'master' in their job description and if it's experience required <= current_experience + 2 and current_experience is not set as -1. 
 did_masters = True                 # True or False, Note: True or False are case-sensitive
 
 # Avoid applying to jobs if their required experience is above your current_experience. (Set value as -1 if you want to apply to all ignoring their required experience...)
@@ -217,10 +209,10 @@ Note: Will be treated as False if `run_in_background = True`
 '''
 ##
 
-# Keep the External Application tabs open? (Note: RECOMMENDED TO LEAVE IT AS TRUE, if you set it false, be sure to CLOSE ALL TABS BEFORE CLOSING THE BROWSER!!!)
+# Keep browser tabs open after applying (Note: RECOMMENDED TO LEAVE IT AS TRUE, if you set it false, be sure to CLOSE ALL TABS BEFORE CLOSING THE BROWSER!!!)
 close_tabs = True                  # True or False, Note: True or False are case-sensitive
 
-# After how many number of applications in current search should the bot switch to next search? 
+# Switch search term after N applications 
 switch_number = 30                 # Only numbers greater than 0... Don't put in quotes
 
 ## Upcoming features (In Development)
@@ -230,7 +222,7 @@ connect_hr = True                  # True or False, Note: True or False are case
 # What message do you want to send during connection request? (Max. 200 Characters)
 connect_request_message = ""       # Leave Empty to send connection request without personalized invitation (recommended to leave it empty, since you only get 10 per month without LinkedIn Premium*)
 
-# Do you want the program to run continuously until you stop it? (Beta)
+# Loop job search continuously (Beta)
 run_non_stop = False               # True or False, Note: True or False are case-sensitive
 '''
 Note: Will be treated as False if `run_in_background = True`
@@ -270,18 +262,8 @@ generated_resume_path = "all resumes/"
 
 
 ############################################################################################################
-'''
-THANK YOU for using my tool 😊! Wishing you the best in your job hunt 🙌🏻!
-
-Sharing is caring! If you found this tool helpful, please share it with your peers 🥺. Your support keeps this project alive.
-
-Support my work on <PATREON_LINK>. Together, we can help more job seekers.
-
-As an independent developer, I pour my heart and soul into creating tools like this, driven by the genuine desire to make a positive impact.
-
-Your support, whether through donations big or small or simply spreading the word, means the world to me and helps keep this project alive and thriving.
-
-Gratefully yours 🙏🏻,
-Aditya Kumar
-'''
+"""
+LinkedIn Auto Applier - Developed by Aditya Kumar
+Good luck with your job search!
+"""
 ############################################################################################################

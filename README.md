@@ -1,4 +1,7 @@
-# LinkedIn AI Auto Job Applier 🤖
+# LinkedIn Auto Applier
+# Developed by Aditya Kumar
+# GitHub: https://github.com/aditya-life/Linkdin_auto_applier
+
 This is an web scraping bot that automates the process of job applications on LinkedIn. It searches for jobs relevant to you, answers all questions in application form, customizes your resume based on the collected job information, such as skills required, description, about company, etc. and applies to the job. Can apply 100+ jobs in less than 1 hour. 
 
 
@@ -130,7 +133,7 @@ Once your code is tested, your changes will be merged to the `main` branch in ne
       config_variable = "value1"    #  <Valid values examples, and NOTES> "value1", "value2", etc. Don't forget quotes ("")
       ```
       ```python
-      # Do you want to randomize the search order for search_terms?
+      # Randomize order of search keywords
       randomize_search_order = False     # True of False, Note: True or False are case-sensitive
       ```
       ```python
@@ -138,7 +141,7 @@ Once your code is tested, your changes will be merged to the `main` branch in ne
       current_experience = 5             # Integers > -2 (Ex: -1, 0, 1, 2, 3, 4...)
       ```
       ```python
-      # Search location, this will be filled in "City, state, or zip code" search box. If left empty as "", tool will not fill it.
+      # Geographic location target for search "City, state, or zip code" search box. If left empty as "", tool will not fill it.
       search_location = "United States"               # Some valid examples: "", "United States", "India", "Chicago, Illinois, United States", "90001, Los Angeles, California, United States", "Bengaluru, Karnataka, India", etc.
 
       ```
@@ -277,16 +280,9 @@ Please consider the following:
 
 ## ⚖️ License
 
-Copyright (C) 2024 Aditya Kumar  <aditya-kumar-552232259@outlook.com>
+Copyright (c) 2026 Aditya Kumar
 
-This program is free software: you can redistribute it and/or modify it under the terms of the MIT License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the MIT License for more details.
-
-You should have received a copy of the MIT License along with this program. If not, see <https://www.gnu.org/licenses/>.
-
-See [AGPLv3 LICENSE](LICENSE) for more info.
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 <br>
 
@@ -294,27 +290,11 @@ See [AGPLv3 LICENSE](LICENSE) for more info.
 
 <br>
 
-## 🐧 Socials
+## 🐧 Contact & Socials
 - **LinkedIn** : https://www.linkedin.com/in/aditya-kumar-552232259/
-- **Email**    : aditya-kumar-552232259@outlook.com
-- **X/Twitter**: https://x.com/aditya-kumar-552232259
-- **Discord**  : godsscion
+- **Email**    : aditya12186@gmail.com
 
-
-## 🙌 Community Support and Discussions
-- **Discord Server** : 
-alternate link: https://discord.gg/ykfDjRFB
-- **GitHub**
-    - [All Discussions](https://github.com/aditya-life/Linkdin_auto_applier/discussions)
-    - [Announcements](https://github.com/aditya-life/Linkdin_auto_applier/discussions/categories/announcements)
-    - [General](https://github.com/aditya-life/Linkdin_auto_applier/discussions/categories/general)
-    - [Feature requests or Ideas](https://github.com/aditya-life/Linkdin_auto_applier/discussions/categories/feature-requests-or-ideas)
-    - [Polls](https://github.com/aditya-life/Linkdin_auto_applier/discussions/categories/polls)
-    - [Community Flex](https://github.com/aditya-life/Linkdin_auto_applier/discussions/categories/community-flex)
-    - [Support Q&A](https://github.com/aditya-life/Linkdin_auto_applier/discussions/categories/support-q-a)
-
-
-#### ℹ️ Version: 26.01.20.5.08
+#### ℹ️ Version: 1.0.0
 
 ---
 
