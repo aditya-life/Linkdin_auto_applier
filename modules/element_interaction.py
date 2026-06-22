@@ -5,8 +5,8 @@ GitHub: https://github.com/aditya-life/Linkdin_auto_applier
 """
 
 
-from config.settings import click_gap, smooth_scroll
-from modules.helpers import buffer, print_lg, sleep
+from config.app_settings import click_gap, smooth_scroll
+from modules.utilities import buffer, print_lg, sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC

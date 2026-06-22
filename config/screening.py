@@ -74,7 +74,7 @@ then it will divide by 30 or 7 and answer respectively. Examples:
   - "0" OR "0" if asked in months OR "0" if asked in weeks
 '''
 
-# Your LinkedIn headline in quotes Eg: "Software Engineer @ Google, Masters in Computer Science", "Recent Grad Student @ MIT, Computer Science"
+# Your LinkedIn headline in quotes Eg: "Software Engineer @ Google, Masters in Computer Application", "Recent Grad Student @ MIT, Computer Science"
 linkedin_headline = "Full Stack Developer with Masters in Computer Applications and 1+ years of experience" # "Headline" or "" to leave this question unanswered
 
 # Your summary in quotes, use \n to add line breaks if using single quotes "Summary".You can skip \n if using triple quotes """Summary"""

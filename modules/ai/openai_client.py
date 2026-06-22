@@ -6,14 +6,14 @@ GitHub: https://github.com/aditya-life/Linkdin_auto_applier
 
 
 
-from config.secrets import *
-from config.settings import showAiErrorAlerts
-from config.personals import ethnicity, gender, disability_status, veteran_status
-from config.questions import *
-from config.search import security_clearance, did_masters
+from config.auth import *
+from config.app_settings import showAiErrorAlerts
+from config.personal import ethnicity, gender, disability_status, veteran_status
+from config.screening import *
+from config.search_filter import security_clearance, did_masters
 
-from modules.helpers import print_lg, critical_error_log, convert_to_json
-from modules.ai.prompts import *
+from modules.utilities import print_lg, critical_error_log, convert_to_json
+from modules.ai.llm_prompts import *
 
 from pyautogui import confirm
 from openai import OpenAI
@@ -68,7 +68,7 @@ def ai_create_openai_client() -> OpenAI:
     try:
         print_lg("Creating OpenAI client...")
         if not use_AI:
-            raise ValueError("AI is not enabled! Please enable it by setting `use_AI = True` in `secrets.py` in `config` folder.")
+            raise ValueError("AI is not enabled! Please enable it by setting `use_AI = True` in `auth.py` in `config` folder.")
         
         client = OpenAI(base_url=llm_api_url, api_key=llm_api_key)
 
@@ -83,7 +83,7 @@ def ai_create_openai_client() -> OpenAI:
         print_lg("---- SUCCESSFULLY CREATED OPENAI CLIENT! ----")
         print_lg(f"Using API URL: {llm_api_url}")
         print_lg(f"Using Model: {llm_model}")
-        print_lg("Check './config/secrets.py' for more details.\n")
+        print_lg("Check './config/auth.py' for more details.\n")
         print_lg("---------------------------------------------")
 
         return client

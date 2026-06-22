@@ -1,7 +1,7 @@
-from config.secrets import *
-from config.settings import showAiErrorAlerts
-from modules.helpers import print_lg, critical_error_log, convert_to_json
-from modules.ai.prompts import *
+from config.auth import *
+from config.app_settings import showAiErrorAlerts
+from modules.utilities import print_lg, critical_error_log, convert_to_json
+from modules.ai.llm_prompts import *
 
 from pyautogui import confirm
 from openai import OpenAI
@@ -17,7 +17,7 @@ def deepseek_create_client() -> OpenAI | None:
     try:
         print_lg("Creating DeepSeek client...")
         if not use_AI:
-            raise ValueError("AI is not enabled! Please enable it by setting `use_AI = True` in `secrets.py` in `config` folder.")
+            raise ValueError("AI is not enabled! Please enable it by setting `use_AI = True` in `auth.py` in `config` folder.")
         
         base_url = llm_api_url
         
@@ -31,7 +31,7 @@ def deepseek_create_client() -> OpenAI | None:
         print_lg("---- SUCCESSFULLY CREATED DEEPSEEK CLIENT! ----")
         print_lg(f"Using API URL: {base_url}")
         print_lg(f"Using Model: {llm_model}")
-        print_lg("Check './config/secrets.py' for more details.\n")
+        print_lg("Check './config/auth.py' for more details.\n")
         print_lg("---------------------------------------------")
         return client
     except Exception as e:

@@ -5,7 +5,7 @@ GitHub: https://github.com/aditya-life/Linkdin_auto_applier
 """
 
 
-from personals import *
+from personal import *
 import json
 
 ###################################################### CONFIGURE YOUR RESUME HERE ######################################################

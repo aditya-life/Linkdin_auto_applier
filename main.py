@@ -28,21 +28,21 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, NoSuchWindowException, ElementNotInteractableException, WebDriverException
 
-from config.personals import *
-from config.questions import *
-from config.search import *
-from config.secrets import use_AI, username, password, ai_provider
-from config.settings import *
+from config.personal import *
+from config.screening import *
+from config.search_filter import *
+from config.auth import use_AI, username, password, ai_provider
+from config.app_settings import *
 
-from modules.open_chrome import *
-from modules.helpers import *
-from modules.clickers_and_finders import *
-from modules.validator import validate_config
+from modules.chrome_launcher import *
+from modules.utilities import *
+from modules.element_interaction import *
+from modules.config_validator import validate_config
 
 if use_AI:
-    from modules.ai.openaiConnections import ai_create_openai_client, ai_extract_skills, ai_answer_question, ai_close_openai_client
-    from modules.ai.deepseekConnections import deepseek_create_client, deepseek_extract_skills, deepseek_answer_question
-    from modules.ai.geminiConnections import gemini_create_client, gemini_extract_skills, gemini_answer_question
+    from modules.ai.openai_client import ai_create_openai_client, ai_extract_skills, ai_answer_question, ai_close_openai_client
+    from modules.ai.deepseek_client import deepseek_create_client, deepseek_extract_skills, deepseek_answer_question
+    from modules.ai.gemini_client import gemini_create_client, gemini_extract_skills, gemini_answer_question
 
 from typing import Literal
 
@@ -110,15 +110,15 @@ def is_logged_in_LN() -> bool:
 def login_LN() -> None:
     '''
     Function to login for LinkedIn
-    * Tries to login using given `username` and `password` from `secrets.py`
+    * Tries to login using given `username` and `password` from `auth.py`
     * If failed, tries to login using saved LinkedIn profile button if available
     * If both failed, asks user to login manually
     '''
     # Find the username and password fields and fill them with user credentials
     driver.get("https://www.linkedin.com/login")
     if username == "username@example.com" and password == "example_password":
-        pyautogui.alert("User did not configure username and password in secrets.py, hence can't login automatically! Please login manually!", "Login Manually","Okay")
-        print_lg("User did not configure username and password in secrets.py, hence can't login automatically! Please login manually!")
+        pyautogui.alert("User did not configure username and password in auth.py, hence can't login automatically! Please login manually!", "Login Manually","Okay")
+        print_lg("User did not configure username and password in auth.py, hence can't login automatically! Please login manually!")
         manual_login_retry(is_logged_in_LN, 2)
         return
     try:

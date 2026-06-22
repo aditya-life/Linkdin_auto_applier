@@ -38,13 +38,13 @@ def check_list(var: list, var_name: str, options: list=[], min_length: int=0) ->
 
 
 
-from config.personals import *
+from config.personal import *
 def validate_personals() -> None | ValueError | TypeError:
     '''
-    Validates all variables in the `/config/personals.py` file.
+    Validates all variables in the `/config/personal.py` file.
     '''
     global __validation_file_path
-    __validation_file_path = "config/personals.py"
+    __validation_file_path = "config/personal.py"
 
     check_string(first_name, "first_name", min_length=1)
     check_string(middle_name, "middle_name")
@@ -66,13 +66,13 @@ def validate_personals() -> None | ValueError | TypeError:
 
 
 
-from config.questions import *
+from config.screening import *
 def validate_questions() -> None | ValueError | TypeError:
     '''
-    Validates all variables in the `/config/questions.py` file.
+    Validates all variables in the `/config/screening.py` file.
     '''
     global __validation_file_path
-    __validation_file_path = "config/questions.py"
+    __validation_file_path = "config/screening.py"
 
     check_string(default_resume_path, "default_resume_path")
     check_string(years_of_experience, "years_of_experience")
@@ -94,13 +94,13 @@ def validate_questions() -> None | ValueError | TypeError:
     check_boolean(overwrite_previous_answers, "overwrite_previous_answers")
 
 
-from config.search import *
+from config.search_filter import *
 def validate_search() -> None | ValueError | TypeError:
     '''
-    Validates all variables in the `/config/search.py` file.
+    Validates all variables in the `/config/search_filter.py` file.
     '''
     global __validation_file_path
-    __validation_file_path = "config/search.py"
+    __validation_file_path = "config/search_filter.py"
 
     check_list(search_terms, "search_terms", min_length=1)
     check_string(search_location, "search_location")
@@ -141,13 +141,13 @@ def validate_search() -> None | ValueError | TypeError:
 
 
 
-from config.secrets import *
+from config.auth import *
 def validate_secrets() -> None | ValueError | TypeError:
     '''
-    Validates all variables in the `/config/secrets.py` file.
+    Validates all variables in the `/config/auth.py` file.
     '''
     global __validation_file_path
-    __validation_file_path = "config/secrets.py"
+    __validation_file_path = "config/auth.py"
 
     check_string(username, "username", min_length=5)
     check_string(password, "password", min_length=5)
@@ -169,13 +169,13 @@ def validate_secrets() -> None | ValueError | TypeError:
 
 
 
-from config.settings import *
+from config.app_settings import *
 def validate_settings() -> None | ValueError | TypeError:
     '''
-    Validates all variables in the `/config/settings.py` file.
+    Validates all variables in the `/config/app_settings.py` file.
     '''
     global __validation_file_path
-    __validation_file_path = "config/settings.py"
+    __validation_file_path = "config/app_settings.py"
 
     check_boolean(close_tabs, "close_tabs")
     check_boolean(follow_companies, "follow_companies")

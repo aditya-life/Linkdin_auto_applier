@@ -1,8 +1,8 @@
 import google.generativeai as genai
-from config.secrets import llm_model, llm_api_key
-from config.settings import showAiErrorAlerts
-from modules.helpers import print_lg, critical_error_log, convert_to_json
-from modules.ai.prompts import *
+from config.auth import llm_model, llm_api_key
+from config.app_settings import showAiErrorAlerts
+from modules.utilities import print_lg, critical_error_log, convert_to_json
+from modules.ai.llm_prompts import *
 from pyautogui import confirm
 from typing import Literal
 
@@ -29,7 +29,7 @@ def gemini_create_client():
     try:
         print_lg("Configuring Gemini client...")
         if not llm_api_key or "YOUR_API_KEY" in llm_api_key:
-            raise ValueError("Gemini API key is not set. Please set it in `config/secrets.py`.")
+            raise ValueError("Gemini API key is not set. Please set it in `config/auth.py`.")
         
         genai.configure(api_key=llm_api_key)
         
@@ -43,7 +43,7 @@ def gemini_create_client():
         
         print_lg("---- SUCCESSFULLY CONFIGURED GEMINI CLIENT! ----")
         print_lg(f"Using Model: {llm_model}")
-        print_lg("Check './config/secrets.py' for more details.\n")
+        print_lg("Check './config/auth.py' for more details.\n")
         print_lg("---------------------------------------------")
         
         return model

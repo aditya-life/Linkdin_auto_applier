@@ -6,8 +6,8 @@ GitHub: https://github.com/aditya-life/Linkdin_auto_applier
 
 
 
-from config.personals import *
-from config.questions import default_resume_path
+from config.personal import *
+from config.screening import default_resume_path
 
 
 

@@ -8,9 +8,9 @@ GitHub: https://github.com/aditya-life/Linkdin_auto_applier
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
-from modules.helpers import get_default_temp_profile, make_directories
-from config.settings import run_in_background, stealth_mode, disable_extensions, safe_mode, file_name, failed_file_name, logs_folder_path, generated_resume_path
-from config.questions import default_resume_path
+from modules.utilities import get_default_temp_profile, make_directories
+from config.app_settings import run_in_background, stealth_mode, disable_extensions, safe_mode, file_name, failed_file_name, logs_folder_path, generated_resume_path
+from config.screening import default_resume_path
 if stealth_mode:
     import undetected_chromedriver as uc
 else: 
@@ -19,7 +19,7 @@ else:
     # from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
-from modules.helpers import find_default_profile_directory, critical_error_log, print_lg
+from modules.utilities import find_default_profile_directory, critical_error_log, print_lg
 from selenium.common.exceptions import SessionNotCreatedException
 import os
 import sys
